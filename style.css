@@ -14,10 +14,11 @@ body {
     overflow: hidden;
 }
 
+/* ========== SIDEBAR ========== */
 .sidebar {
     width: 25%;
     height: 100vh;
-    padding: 60px; /* Más espacio */
+    padding: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -69,6 +70,7 @@ body {
     width: 100%;
 }
 
+/* ========== CONTENIDO ========== */
 .content {
     width: 75%;
     height: 100vh;
@@ -81,8 +83,20 @@ body {
     align-items: center;
 }
 
+.section {
+    display: none;
+}
 
-/* Texto de presentación */
+/* ========== HOME ========== */
+#home {
+    display: flex !important; /* Asegura que el Home aparezca al cargar */
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 40px;
+}
+
 .intro-text {
     text-align: right;
     font-size: 18px;
@@ -94,26 +108,14 @@ body {
     animation: fadeIn 1.2s ease-out forwards;
 }
 
-/* ============================= */
-/* Diseño del Fondo con Ruido */
-/* ============================= */
-body::before {
-    content: "";
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.2;
-    z-index: -1;
-    transform: translate(var(--parallaxX), var(--parallaxY));
-}
-
+/* ========== PROJECTS ========== */
 #projects {
     display: none;
     width: 100%;
     height: 100vh;
-    overflow-y: auto; /* Scroll separado */
-    padding-right: 40px;
+    overflow-y: auto;
+    padding: 80px 40px;
+    text-align: right;
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -121,8 +123,6 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 50px;
-    padding: 80px 40px;
-    text-align: right;
 }
 
 .project-item {
@@ -153,16 +153,41 @@ body::before {
     background: transparent;
 }
 
-
-#home {
-    display: flex !important;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100vh;
+/* ========== INFO & CONTACT ========== */
+#info, #contact {
+    display: none;
     width: 100%;
-    padding: 40px;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 80px 40px;
+    text-align: right;
+    transition: opacity 0.5s ease-in-out;
 }
-/* Animación de entrada */
+
+#info h2, #contact h2 {
+    font-size: 26px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+#info p, #contact p {
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+#info a, #contact a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 400;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#info a:hover, #contact a:hover {
+    opacity: 0.7;
+}
+
+/* ========== EFECTOS Y ANIMACIONES ========== */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -172,29 +197,4 @@ body::before {
 .fade-in.show {
     opacity: 1;
     transform: translateY(0);
-}
-/* Líneas delgadas entre secciones */
-.section-divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 40px 0;
-}
-
-.sidebar h1:hover,
-.sidebar nav ul li a:hover {
-    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
-}
-/* Efecto moderno en el texto al pasar el cursor */
-.sidebar h1,
-.sidebar nav ul li a,
-.project-item {
-    transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-/* Cambio de color al pasar el cursor */
-.sidebar h1:hover,
-.sidebar nav ul li a:hover,
-.project-item:hover {
-    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
 }
