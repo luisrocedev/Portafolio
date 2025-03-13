@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    display: flex;
+    overflow: hidden;
+}
+
+/* ============================= */
+/* Layout: Menú a la Izquierda y Contenido a la Derecha */
+/* ============================= */
+.sidebar {
+    width: 25%;
+    height: 100vh;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar h1 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 300;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.sidebar nav ul li a:hover {
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* ============================= */
+/* Contenido a la Derecha */
+/* ============================= */
+.content {
+    width: 75%;
+    height: 100vh;
+    overflow: hidden;
+    padding: 40px;
+    position: absolute;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* Texto de presentación */
+.intro-text {
+    text-align: right;
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.2s ease-out forwards;
+}
+
+/* ============================= */
+/* Diseño del Fondo con Ruido */
+/* ============================= */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.2;
+    z-index: -1;
+    transform: translate(var(--parallaxX), var(--parallaxY));
+}
+
+/* ============================= */
+/* Sección de Proyectos */
+/* ============================= */
+#projects {
+    display: none; /* Ahora sí está oculto correctamente */
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+}
+
+.project-item {
+    font-size: 24px;
+    font-weight: 300;
+    color: white;
+    text-align: right;
+    transition: transform 0.3s ease-in-out, color 0.3s, opacity 0.5s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.project-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#home {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 40px;
+}
