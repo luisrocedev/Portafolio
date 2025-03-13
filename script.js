@@ -40,3 +40,19 @@ document.addEventListener("mousemove", (e) => {
     document.documentElement.style.setProperty("--parallaxX", `${moveX}px`);
     document.documentElement.style.setProperty("--parallaxY", `${moveY}px`);
 });
+function showProjects() {
+    const projectItems = document.querySelectorAll(".project-item");
+    projectItems.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add("show");
+        }, index * 200); // Efecto más suave
+    });
+}
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        document.querySelectorAll(".fade-in").forEach(el => {
+            el.classList.add("show");
+        });
+    }, 500);
+});
+
