@@ -14,13 +14,10 @@ body {
     overflow: hidden;
 }
 
-/* ============================= */
-/* Sidebar (Menú Izquierdo) */
-/* ============================= */
 .sidebar {
     width: 25%;
     height: 100vh;
-    padding: 60px;
+    padding: 60px; /* Más espacio */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,6 +39,7 @@ body {
 
 .sidebar nav ul {
     list-style: none;
+    padding: 0;
     margin-top: 40px;
 }
 
@@ -53,19 +51,28 @@ body {
     color: #e0e0e0;
     text-decoration: none;
     font-size: 18px;
-    transition: color 0.3s ease-in-out;
+    font-weight: 300;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-.sidebar nav ul li a:hover {
-    color: rgba(255, 255, 255, 0.6);
+/* Hover con subrayado animado */
+.sidebar nav ul li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width 0.3s ease-in-out;
 }
 
-/* ============================= */
-/* Contenido (Derecha) */
-/* ============================= */
+.sidebar nav ul li a:hover::after {
+    width: 100%;
+}
+
 .content {
     width: 75%;
     height: 100vh;
+    overflow: hidden;
     padding: 60px;
     position: absolute;
     right: 0;
@@ -74,41 +81,88 @@ body {
     align-items: center;
 }
 
-/* Sección de Inicio */
-#home {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
+
+/* Texto de presentación */
+.intro-text {
+    text-align: right;
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1.2s ease-out forwards;
 }
 
 /* ============================= */
-/* Sección de Proyectos */
+/* Diseño del Fondo con Ruido */
 /* ============================= */
+body::before {
+    content: "";
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.2;
+    z-index: -1;
+    transform: translate(var(--parallaxX), var(--parallaxY));
+}
+
 #projects {
     display: none;
     width: 100%;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: auto; /* Scroll separado */
     padding-right: 40px;
     transition: opacity 0.5s ease-in-out;
+}
+
+.project-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 80px 40px;
+    text-align: right;
 }
 
 .project-item {
     font-size: 26px;
     font-weight: 300;
     color: white;
-    transition: color 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, color 0.3s, opacity 0.5s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.project-item:hover {
-    color: rgba(255, 255, 255, 0.6);
+.project-item.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* ============================= */
-/* Animaciones */
-/* ============================= */
+/* Scroll minimalista */
+#projects::-webkit-scrollbar {
+    width: 5px;
+}
+
+#projects::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+#projects::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+#home {
+    display: flex !important;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 40px;
+}
+/* Animación de entrada */
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
@@ -118,4 +172,29 @@ body {
 .fade-in.show {
     opacity: 1;
     transform: translateY(0);
+}
+/* Líneas delgadas entre secciones */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 40px 0;
+}
+
+.sidebar h1:hover,
+.sidebar nav ul li a:hover {
+    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
+}
+/* Efecto moderno en el texto al pasar el cursor */
+.sidebar h1,
+.sidebar nav ul li a,
+.project-item {
+    transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Cambio de color al pasar el cursor */
+.sidebar h1:hover,
+.sidebar nav ul li a:hover,
+.project-item:hover {
+    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
 }
