@@ -10,10 +10,10 @@
 
     <!-- Sidebar Fijo a la Izquierda -->
     <aside class="sidebar">
-        <div>
+        <header>
             <h1>Luis Rodriguez</h1>
             <p>Designer & Developer</p>
-        </div>
+        </header>
         <nav>
             <ul>
                 <li><a href="#" data-section="home">Home</a></li>
@@ -24,13 +24,15 @@
                 <li><a href="#" data-section="copycats">Copycats</a></li>
             </ul>
         </nav>
-        <p>© Luis Rodriguez</p>
+        <footer>
+            <p>© 2024 Luis Rodriguez</p>
+        </footer>
     </aside>
 
-    <!-- Contenido Scrollable a la Derecha -->
+    <!-- Contenido Principal -->
     <main class="content">
-        <!-- Página de Inicio -->
-        <section id="home">
+        <!-- Sección de Inicio -->
+        <section id="home" class="fade-in">
             <div class="intro-text">
                 <p>Nacido en 1994<br>
                 en Ciudad, País.<br>
@@ -44,8 +46,8 @@
             </div>
         </section>
 
-        <!-- Sección de Proyectos (Oculta por defecto) -->
-        <section id="projects">
+        <!-- Sección de Proyectos -->
+        <section id="projects" class="hidden">
             <div class="project-container">
                 <div class="project-item">
                     <span>Ejemplo: Jul.2024 / Portfolio / Dev</span>

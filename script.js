@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const introSection = document.getElementById("home");
     const projectsSection = document.getElementById("projects");
 
-    // Asegurar que "Home" esté visible al cargar
+    // Mostrar "Home" por defecto
     introSection.style.display = "flex";
     projectsSection.style.display = "none";
 
@@ -15,44 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 introSection.style.display = "none";
                 projectsSection.style.display = "block";
                 showProjects();
-            } else if (section === "home") {
+            } else {
                 projectsSection.style.display = "none";
                 introSection.style.display = "flex";
             }
         });
     });
+
+    // Activar animación de entrada en los elementos con "fade-in"
+    document.querySelectorAll(".fade-in").forEach(el => el.classList.add("show"));
 });
 
 // 🎥 Animación de Entrada de Proyectos
 function showProjects() {
-    const projectItems = document.querySelectorAll(".project-item");
-    projectItems.forEach((item, index) => {
+    document.querySelectorAll(".project-item").forEach((item, index) => {
         setTimeout(() => {
             item.classList.add("show");
-        }, index * 150);
+        }, index * 200);
     });
 }
 
 // 🌌 Efecto Parallax en el fondo
 document.addEventListener("mousemove", (e) => {
-    const moveX = (e.clientX / window.innerWidth - 0.5) * 10;
-    const moveY = (e.clientY / window.innerHeight - 0.5) * 10;
-    document.documentElement.style.setProperty("--parallaxX", `${moveX}px`);
-    document.documentElement.style.setProperty("--parallaxY", `${moveY}px`);
+    document.documentElement.style.setProperty("--parallaxX", `${(e.clientX / window.innerWidth - 0.5) * 10}px`);
+    document.documentElement.style.setProperty("--parallaxY", `${(e.clientY / window.innerHeight - 0.5) * 10}px`);
 });
-function showProjects() {
-    const projectItems = document.querySelectorAll(".project-item");
-    projectItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add("show");
-        }, index * 200); // Efecto más suave
-    });
-}
-document.addEventListener("DOMContentLoaded", () => {
-    setTimeout(() => {
-        document.querySelectorAll(".fade-in").forEach(el => {
-            el.classList.add("show");
-        });
-    }, 500);
-});
-
