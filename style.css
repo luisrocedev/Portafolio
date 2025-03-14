@@ -1,200 +1,315 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+/*
+  1) Base minimalista + tipografía
+  2) Modo Light / Dark y Monospaced
+  3) Canvas de fondo con z-index
+  4) Glitch text
+  5) Scroll reveal y fade-in
+*/
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+
+/* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Tipografía base */
 body {
-    background-color: #0d0d0d;
-    color: #e0e0e0;
-    display: flex;
-    overflow: hidden;
+  font-family: "Roboto Mono", monospace;
+  background-color: #000;
+  color: #cfcfcf;
+  border: 1px solid #333;
+  min-height: 100vh;
 }
 
+/* Panel vertical a la izquierda para toggles */
+.theme-panel {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  writing-mode: vertical-rl; /* escribir verticalmente */
+  transform: rotate(180deg); /* invertimos el texto vertical */
+  font-size: 14px;
+  color: #fff;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+.theme-panel label {
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.theme-panel input {
+  margin-right: 6px;
+  transform: rotate(180deg);
+}
+
+/* Modo Light */
+body.light-mode {
+  background-color: #fafafa;
+  color: #222;
+  border: 1px solid #ccc;
+}
+body.light-mode .sidebar,
+body.light-mode .nav-list li a,
+body.light-mode .footer {
+  color: #222;
+  border-right: 1px solid #ccc;
+}
+body.light-mode .nav-bullet {
+  background: #222;
+}
+
+/* Modo Dark (si tu base es oscura, este toggle quizá invertido) */
+body.dark-mode {
+  background-color: #000;
+  color: #cfcfcf;
+}
+
+/* Modo Monospaced - si ya usas monospaced, 
+   podrías usar otra fuente si toggle-mono se desactiva. 
+   O si tu base es "sans", la clase .mono-font la cambia a "monospace" */
+body.mono-font {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+/* Canvas */
+#bgCanvas {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Estructura principal */
+.page-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* SIDEBAR */
 .sidebar {
-    width: 25%;
-    height: 100vh;
-    padding: 60px; /* Más espacio */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    left: 0;
-    top: 0;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  width: 25%;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.header-info h1 {
+  font-size: 56px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+.header-info p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.sidebar h1 {
-    font-size: 36px;
-    font-weight: 300;
+.nav-list {
+  list-style: none;
+  margin-top: 40px;
+}
+.nav-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.nav-bullet {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  margin-right: 10px;
+  opacity: 0.8;
+}
+.nav-list li a {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+.nav-list li a:hover {
+  color: #fff;
+}
+.footer {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.sidebar p {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 40px;
-}
-
-.sidebar nav ul li {
-    margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 300;
-    transition: color 0.3s ease, letter-spacing 0.3s ease;
-}
-
-/* Hover con subrayado animado */
-.sidebar nav ul li a::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 1px;
-    background: white;
-    transition: width 0.3s ease-in-out;
-}
-
-.sidebar nav ul li a:hover::after {
-    width: 100%;
-}
-
+/* CONTENIDO */
 .content {
-    width: 75%;
-    height: 100vh;
-    overflow: hidden;
-    padding: 60px;
-    position: absolute;
-    right: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  width: 75%;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+.content section {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-
-/* Texto de presentación */
-.intro-text {
-    text-align: right;
-    font-size: 18px;
-    line-height: 1.8;
-    font-weight: 300;
-    max-width: 300px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 1.2s ease-out forwards;
-}
-
-/* ============================= */
-/* Diseño del Fondo con Ruido */
-/* ============================= */
+/* Fondo Ruido + Gradiente Radial */
 body::before {
-    content: "";
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.2;
-    z-index: -1;
-    transform: translate(var(--parallaxX), var(--parallaxY));
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 85% 50%, 
+      rgba(100,100,100,0.5) 0%, 
+      rgba(40,40,40,1) 60%
+    ),
+    url('https://grainy-gradients.vercel.app/noise.svg');
+  background-blend-mode: multiply;
+  opacity: 0.2;
+  z-index: -1;
+  transform: translate(var(--parallaxX), var(--parallaxY));
 }
 
+/* HOME */
+#home {
+  align-items: center;
+  justify-content: flex-end;
+}
+.intro-text {
+  text-align: right;
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 350px;
+}
+
+/* PROYECTOS */
 #projects {
-    display: none;
-    width: 100%;
-    height: 100vh;
-    overflow-y: auto; /* Scroll separado */
-    padding-right: 40px;
-    transition: opacity 0.5s ease-in-out;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-y: auto;
 }
-
 .project-container {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    padding: 80px 40px;
-    text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+  margin-top: 80px;
+  margin-right: 40px;
 }
 
-.project-item {
-    font-size: 26px;
-    font-weight: 300;
-    color: white;
-    transition: transform 0.3s ease-in-out, color 0.3s, opacity 0.5s ease-out;
-    opacity: 0;
-    transform: translateY(20px);
+/* Otras secciones */
+#info, #contact, #faq, #copycats, #experiments {
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-y: auto;
+  margin-top: 80px;
+  margin-right: 40px;
+  gap: 40px;
+  text-align: right;
 }
 
-.project-item.show {
-    opacity: 1;
-    transform: translateY(0);
+/* ANIMACIÓN ESCALONADA .section-item */
+.section-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.section-item.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Scroll minimalista */
-#projects::-webkit-scrollbar {
-    width: 5px;
+#projects::-webkit-scrollbar,
+#info::-webkit-scrollbar,
+#contact::-webkit-scrollbar,
+#faq::-webkit-scrollbar,
+#copycats::-webkit-scrollbar,
+#experiments::-webkit-scrollbar {
+  width: 5px;
+}
+#projects::-webkit-scrollbar-thumb,
+#info::-webkit-scrollbar-thumb,
+#contact::-webkit-scrollbar-thumb,
+#faq::-webkit-scrollbar-thumb,
+#copycats::-webkit-scrollbar-thumb,
+#experiments::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+#projects::-webkit-scrollbar-track,
+#info::-webkit-scrollbar-track,
+#contact::-webkit-scrollbar-track,
+#faq::-webkit-scrollbar-track,
+#copycats::-webkit-scrollbar-track,
+#experiments::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-#projects::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
+/* Efectos Hover y Transiciones */
+.nav-list li a,
+.section-item {
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+.section-item:hover {
+  color: #ccc;
 }
 
-#projects::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-#home {
-    display: flex !important;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    padding: 40px;
-}
-/* Animación de entrada */
+/* Fade-in Global */
 .fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
-
 .fade-in.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* Líneas delgadas entre secciones */
-.section-divider {
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 40px 0;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.sidebar h1:hover,
-.sidebar nav ul li a:hover {
-    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
+/* Glitch Text Sencillo */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 0 1px rgba(255,255,255,0.4);
+  animation: glitchAnimation 3s infinite;
 }
-/* Efecto moderno en el texto al pasar el cursor */
-.sidebar h1,
-.sidebar nav ul li a,
-.project-item {
-    transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+@keyframes glitchAnimation {
+  0% { text-shadow: 0 0 1px #fff; }
+  5% { text-shadow: 2px 0 #f0f, -2px -1px #0ff; }
+  10% { text-shadow: -2px 0 #f0f; }
+  15% { text-shadow: 2px -1px #0ff; }
+  20% { text-shadow: 0 0 1px #fff; }
+  100% { text-shadow: 0 0 1px #fff; }
 }
 
-/* Cambio de color al pasar el cursor */
-.sidebar h1:hover,
-.sidebar nav ul li a:hover,
-.project-item:hover {
-    color: rgba(255, 255, 255, 0.6); /* Se vuelve un poco gris */
+/* Scroll Reveal */
+.scroll-reveal {
+  /* Por defecto sin estilo especial, 
+     la clase .in-view se agrega con Intersection Observer */
+}
+.scroll-reveal.in-view {
+  /* Podrías cambiar color o un transform */
+  color: #fff;
+}
+
+/* (Opcional) Ajustes a headings, 
+   por ejemplo, en modo super-ligero 
+*/
+h2 {
+  font-size: 28px;
+  font-weight: 300;
+  margin-bottom: 10px;
 }

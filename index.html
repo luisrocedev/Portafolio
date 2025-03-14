@@ -1,60 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luis Rodriguez | Dev & Designer</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keita Yamada | Designer & Developer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-    <!-- Sidebar Fijo a la Izquierda -->
-    <aside class="sidebar">
-        <div>
-            <h1>Luis Rodriguez</h1>
-            <p>Designer & Developer</p>
+<!-- Canvas de fondo -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- Panel de Opciones (Light / Dark / Monospaced) -->
+<div class="theme-panel">
+  <label>
+    <input type="checkbox" id="toggle-dark" />
+    DARK
+  </label>
+  <label>
+    <input type="checkbox" id="toggle-mono" />
+    MONOSPACED
+  </label>
+</div>
+
+<div class="page-wrapper">
+  
+  <!-- Barra Lateral -->
+  <aside class="sidebar">
+    <div class="header-info">
+      <h1>Keita Yamada</h1>
+      <p>Designer & Developer</p>
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><div class="nav-bullet"></div><a href="#" data-section="home">Home</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="projects">Projects</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="info">Info</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="contact">Contact</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="faq">FAQ</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="copycats">Copycats</a></li>
+        <li><div class="nav-bullet"></div><a href="#" data-section="experiments">Experiments</a></li>
+      </ul>
+    </nav>
+    <p class="footer">&copy; Keita Yamada</p>
+  </aside>
+
+  <!-- Contenido a la Derecha -->
+  <main class="content">
+    
+    <!-- Sección HOME -->
+    <section id="home">
+      <!-- .section-item para animación escalonada, 
+           .glitch-text para efecto glitch, 
+           .scroll-reveal para animación al hacer scroll. 
+      -->
+      <div class="section-item glitch-text scroll-reveal">
+        <p class="intro-text fade-in">
+          Born in 1994<br/>
+          in Osaka, Japan.<br/><br/>
+          I explore<br/>
+          new expressions<br/>
+          in web design...
+        </p>
+      </div>
+    </section>
+
+    <!-- Sección PROJECTS -->
+    <section id="projects">
+      <div class="project-container">
+        <div class="section-item glitch-text scroll-reveal">
+          <span>Jul.2024 / Portfolio / Dev</span>
+          <strong>Proyecto Prueba #1</strong>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#" data-section="home">Home</a></li>
-                <li><a href="#" data-section="projects">Projects</a></li>
-                <li><a href="#" data-section="info">Info</a></li>
-                <li><a href="#" data-section="contact">Contact</a></li>
-                <li><a href="#" data-section="faq">FAQ</a></li>
-                <li><a href="#" data-section="copycats">Copycats</a></li>
-            </ul>
-        </nav>
-        <p>© Luis Rodriguez</p>
-    </aside>
+        <div class="section-item glitch-text scroll-reveal">
+          <span>Feb.2025 / Landing / Frontend</span>
+          <strong>Proyecto Prueba #2</strong>
+        </div>
+      </div>
+    </section>
 
-    <!-- Contenido Scrollable a la Derecha -->
-    <main class="content">
-        <!-- Página de Inicio -->
-        <section id="home">
-            <div class="intro-text">
-                <p>Nacido en 1994<br>
-                en Ciudad, País.<br>
-                Creo que el diseño web<br>
-                puede ser más diverso<br>
-                e inspirador.<br><br>
-                Con una misión de explorar<br>
-                nuevas posibilidades en el diseño web,<br>
-                estoy en busca de nuevas<br>
-                expresiones y pensamientos.</p>
-            </div>
-        </section>
+    <!-- Sección INFO -->
+    <section id="info">
+      <div class="section-item glitch-text scroll-reveal">
+        <h2>Information</h2>
+        <p>
+          Background, style, or personal approach details...
+        </p>
+      </div>
+    </section>
 
-        <!-- Sección de Proyectos (Oculta por defecto) -->
-        <section id="projects">
-            <div class="project-container">
-                <div class="project-item">
-                    <span>Ejemplo: Jul.2024 / Portfolio / Dev</span>
-                    <strong>Proyecto de Prueba</strong>
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- Sección CONTACT -->
+    <section id="contact">
+      <div class="section-item glitch-text scroll-reveal">
+        <h2>Contact</h2>
+        <p>Email, social, anything you prefer.</p>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Sección FAQ -->
+    <section id="faq">
+      <div class="section-item glitch-text scroll-reveal">
+        <h2>FAQ</h2>
+        <p>Common Q & A about your services.</p>
+      </div>
+    </section>
+
+    <!-- Sección COPYCATS -->
+    <section id="copycats">
+      <div class="section-item glitch-text scroll-reveal">
+        <h2>Copycats</h2>
+        <p>Similar references or disclaimers about mimicked design.</p>
+      </div>
+    </section>
+
+    <!-- Sección EXPERIMENTS -->
+    <section id="experiments">
+      <div class="section-item glitch-text scroll-reveal">
+        <h2>Experiments</h2>
+        <p>Here you can embed p5.js sketches or generative art demos.</p>
+        <div id="sketch-container"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
