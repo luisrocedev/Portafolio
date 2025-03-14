@@ -89,8 +89,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   /**
    * 3) DARK/LIGHT TOGGLE
-   *    If checkbox is checked => dark mode => label text => "LIGHT"
-   *    If unchecked => light mode => label text => "DARK"
+   *    If checkbox is checked => dark mode => label => "LIGHT"
+   *    If unchecked => light mode => label => "DARK"
    */
   function initThemePanel() {
     const toggleDark = document.getElementById("toggle-dark");

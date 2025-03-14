@@ -1,10 +1,11 @@
 /*
 ===========================================================
-  Final Portfolio Style
-  1) Loading Screen with progress bar
+  Final Portfolio with Smooth Mode Transition
+  1) Loading Screen with bar
   2) Dark mode default, Light mode => #000 text
-  3) Dynamic checkbox styling + label text "LIGHT"/"DARK"
-  4) Responsive fix so nav bullets remain on mobile
+  3) Custom checkbox + label text "LIGHT"/"DARK"
+  4) Smooth transitions for color changes
+  5) Responsive fix so nav bullets remain on mobile
 ===========================================================
 */
 
@@ -25,6 +26,8 @@ body {
   border: 1px solid #333;
   min-height: 100vh;
   overflow-x: hidden;
+  /* Smooth transition for background + color */
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* LOADING SCREEN */
@@ -86,7 +89,8 @@ body {
   display: inline-block;
   margin-bottom: 10px;
 }
-/* CUSTOM CHECKBOX STYLING */
+
+/* CUSTOM CHECKBOX: black in light mode, white in dark mode */
 .theme-panel input[type="checkbox"] {
   -webkit-appearance: none;
   width: 13px;
@@ -94,22 +98,26 @@ body {
   cursor: pointer;
   margin-right: 0px;
   transform: rotate(180deg);
-  border: 2px solid #000; /* default => black box => light mode style */
-  background-color: #000; 
+  border: 2px solid #000;
+  background-color: #000;
   transition: all 0.3s ease;
   position: relative;
 }
 .theme-panel input[type="checkbox"]:checked {
-  border-color: #fff; /* dark mode => white box */
+  border-color: #fff;
   background-color: #fff;
 }
 
-/* LIGHT MODE => #000 text */
+/* LIGHT MODE => #000 text 
+   also transition for color 
+*/
 body.light-mode {
   background-color: #fff;
   color: #000;
   border: 1px solid #ccc;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
+
 /* force #000 for all text-like elements in light mode */
 body.light-mode .sidebar,
 body.light-mode .header-info h1,
@@ -126,6 +134,7 @@ body.light-mode .nav-bullet,
 body.light-mode .project-container a {
   color: #000 !important;
   background: none !important;
+  transition: color 0.5s ease, background-color 0.5s ease;
 }
 body.light-mode .nav-bullet {
   background-color: #000 !important;
@@ -135,6 +144,7 @@ body.light-mode .nav-bullet {
 body.dark-mode {
   background-color: #000;
   color: #cfcfcf;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* BACKGROUND CANVAS */
@@ -155,12 +165,12 @@ body.dark-mode {
   height: 100%;
 }
 
-/* SIDEBAR (25% width on desktop) */
+/* SIDEBAR */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 25%;
+  width: 30%;
   height: 100vh; 
   padding: 60px;
   display: flex;
@@ -168,15 +178,19 @@ body.dark-mode {
   justify-content: space-between;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   overflow-y: auto;
+  /* transition for background + color */
+  transition: color 0.5s ease, background-color 0.5s ease;
 }
 .header-info h1 {
   font-size: 56px;
   font-weight: 300;
   margin-bottom: 10px;
+  transition: color 0.5s ease;
 }
 .header-info p {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
+  transition: color 0.5s ease;
 }
 
 /* NAV */
@@ -196,12 +210,13 @@ body.dark-mode {
   background: #fff;
   margin-right: 10px;
   opacity: 0.8;
+  transition: background-color 0.5s ease;
 }
 .nav-list li a {
   color: inherit;
   text-decoration: none;
   font-size: 18px;
-  transition: color 0.3s ease;
+  transition: color 0.5s ease;
 }
 .nav-list li a:hover {
   color: #fff;
@@ -211,6 +226,7 @@ body.dark-mode {
 .footer {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.4);
+  transition: color 0.5s ease;
 }
 
 /* MAIN CONTENT => 75% on desktop */
@@ -221,6 +237,7 @@ body.dark-mode {
   justify-content: flex-end;
   align-items: center;
   overflow: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Each section => full height on desktop */
@@ -230,6 +247,7 @@ body.dark-mode {
   height: 100vh;
   padding: 40px;
   box-sizing: border-box;
+  transition: color 0.5s ease, background-color 0.5s ease;
 }
 
 /* PARALLAX BG => radial gradient + noise */
@@ -248,6 +266,7 @@ body::before {
   opacity: 0.2;
   z-index: -1;
   transform: translate(var(--parallaxX), var(--parallaxY));
+  transition: opacity 0.5s ease;
 }
 
 /* HOME */
@@ -260,6 +279,7 @@ body::before {
   font-size: 18px;
   line-height: 1.7;
   max-width: 350px;
+  transition: color 0.5s ease;
 }
 
 /* PROJECTS */
@@ -279,7 +299,7 @@ body::before {
 .project-container a {
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.5s ease;
 }
 .project-container a:hover {
   color: #ccc;
@@ -370,6 +390,7 @@ h2 {
   font-size: 28px;
   font-weight: 300;
   margin-bottom: 10px;
+  transition: color 0.5s ease;
 }
 
 /* RESPONSIVE BREAKPOINTS */
@@ -383,6 +404,7 @@ h2 {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px;
+    transition: none; /* can remove if you want transitions here too */
   }
   .footer {
     margin-top: 20px;
@@ -414,7 +436,7 @@ h2 {
 /* TABLET (up to ~1024px) */
 @media (max-width: 1024px) {
   .sidebar {
-    width: 30%;
+    width: 35%;
   }
   .content {
     margin-left: 30%;
