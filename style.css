@@ -1,36 +1,77 @@
 /*
-  1) Base minimalista + tipografía
-  2) Modo Light / Dark y Monospaced
-  3) Canvas de fondo con z-index
-  4) Glitch text
-  5) Scroll reveal y fade-in
+===========================================================
+  Final Portfolio Style
+  1) Loading Screen with progress bar
+  2) Dark mode default, Light mode => #000 text
+  3) Dynamic checkbox styling + label text "LIGHT"/"DARK"
+  4) Responsive fix so nav bullets remain on mobile
+===========================================================
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
 
-/* Reset */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Tipografía base */
+/* BASE */
 body {
   font-family: "Roboto Mono", monospace;
   background-color: #000;
   color: #cfcfcf;
   border: 1px solid #333;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Panel vertical a la izquierda para toggles */
+/* LOADING SCREEN */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+.loading-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.loading-content {
+  text-align: center;
+  color: #fff;
+}
+.loading-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.loading-bar-container {
+  width: 300px;
+  height: 12px;
+  background-color: #444; 
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.loading-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #fff;
+  transition: width 0.1s linear;
+}
+
+/* THEME PANEL (Dark/Light) */
 .theme-panel {
   position: fixed;
   bottom: 10px;
   left: 0;
-  writing-mode: vertical-rl; /* escribir verticalmente */
-  transform: rotate(180deg); /* invertimos el texto vertical */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
   font-size: 14px;
   color: #fff;
   z-index: 10;
@@ -45,44 +86,61 @@ body {
   display: inline-block;
   margin-bottom: 10px;
 }
-.theme-panel input {
-  margin-right: 6px;
+/* CUSTOM CHECKBOX STYLING */
+.theme-panel input[type="checkbox"] {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  cursor: pointer;
+  margin-right: 0px;
   transform: rotate(180deg);
+  border: 2px solid #000; /* default => black box => light mode style */
+  background-color: #000; 
+  transition: all 0.3s ease;
+  position: relative;
+}
+.theme-panel input[type="checkbox"]:checked {
+  border-color: #fff; /* dark mode => white box */
+  background-color: #fff;
 }
 
-/* Modo Light */
+/* LIGHT MODE => #000 text */
 body.light-mode {
-  background-color: #fafafa;
-  color: #222;
+  background-color: #fff;
+  color: #000;
   border: 1px solid #ccc;
 }
+/* force #000 for all text-like elements in light mode */
 body.light-mode .sidebar,
+body.light-mode .header-info h1,
+body.light-mode .header-info p,
 body.light-mode .nav-list li a,
-body.light-mode .footer {
-  color: #222;
-  border-right: 1px solid #ccc;
+body.light-mode .footer,
+body.light-mode .intro-text,
+body.light-mode p,
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode span,
+body.light-mode strong,
+body.light-mode .nav-bullet,
+body.light-mode .project-container a {
+  color: #000 !important;
+  background: none !important;
 }
 body.light-mode .nav-bullet {
-  background: #222;
+  background-color: #000 !important;
 }
 
-/* Modo Dark (si tu base es oscura, este toggle quizá invertido) */
+/* DARK MODE */
 body.dark-mode {
   background-color: #000;
   color: #cfcfcf;
 }
 
-/* Modo Monospaced - si ya usas monospaced, 
-   podrías usar otra fuente si toggle-mono se desactiva. 
-   O si tu base es "sans", la clase .mono-font la cambia a "monospace" */
-body.mono-font {
-  font-family: 'Roboto Mono', monospace !important;
-}
-
-/* Canvas */
+/* BACKGROUND CANVAS */
 #bgCanvas {
   position: fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
@@ -90,22 +148,26 @@ body.mono-font {
   pointer-events: none;
 }
 
-/* Estructura principal */
+/* PAGE WRAPPER */
 .page-wrapper {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-/* SIDEBAR */
+/* SIDEBAR (25% width on desktop) */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 25%;
+  height: 100vh; 
   padding: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
 }
 .header-info h1 {
   font-size: 56px;
@@ -117,6 +179,7 @@ body.mono-font {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* NAV */
 .nav-list {
   list-style: none;
   margin-top: 40px;
@@ -124,18 +187,18 @@ body.mono-font {
 .nav-list li {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 .nav-bullet {
   width: 6px;
   height: 6px;
-  background: #fff;
   border-radius: 50%;
+  background: #fff;
   margin-right: 10px;
   opacity: 0.8;
 }
 .nav-list li a {
-  color: #cfcfcf;
+  color: inherit;
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s ease;
@@ -143,20 +206,24 @@ body.mono-font {
 .nav-list li a:hover {
   color: #fff;
 }
+
+/* Footer in sidebar */
 .footer {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* CONTENIDO */
+/* MAIN CONTENT => 75% on desktop */
 .content {
+  margin-left: 25%;
   width: 75%;
-  position: relative;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   overflow: hidden;
 }
+
+/* Each section => full height on desktop */
 .content section {
   display: none;
   width: 100%;
@@ -165,7 +232,7 @@ body.mono-font {
   box-sizing: border-box;
 }
 
-/* Fondo Ruido + Gradiente Radial */
+/* PARALLAX BG => radial gradient + noise */
 body::before {
   content: "";
   position: fixed;
@@ -195,7 +262,7 @@ body::before {
   max-width: 350px;
 }
 
-/* PROYECTOS */
+/* PROJECTS */
 #projects {
   flex-direction: column;
   align-items: flex-end;
@@ -205,23 +272,31 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 40px;
-  margin-top: 80px;
+  gap: 30px;
+  margin-top: 60px;
   margin-right: 40px;
 }
+.project-container a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.project-container a:hover {
+  color: #ccc;
+}
 
-/* Otras secciones */
-#info, #contact, #faq, #copycats, #experiments {
+/* INFO, CONTACT, FAQ */
+#info, #contact, #faq {
   flex-direction: column;
   align-items: flex-end;
   overflow-y: auto;
-  margin-top: 80px;
+  margin-top: 60px;
   margin-right: 40px;
-  gap: 40px;
+  gap: 30px;
   text-align: right;
 }
 
-/* ANIMACIÓN ESCALONADA .section-item */
+/* STAGGERED REVEAL => .section-item.show */
 .section-item {
   opacity: 0;
   transform: translateY(20px);
@@ -232,34 +307,28 @@ body::before {
   transform: translateY(0);
 }
 
-/* Scroll minimalista */
+/* Minimal scrollbars for sections */
 #projects::-webkit-scrollbar,
 #info::-webkit-scrollbar,
 #contact::-webkit-scrollbar,
-#faq::-webkit-scrollbar,
-#copycats::-webkit-scrollbar,
-#experiments::-webkit-scrollbar {
+#faq::-webkit-scrollbar {
   width: 5px;
 }
 #projects::-webkit-scrollbar-thumb,
 #info::-webkit-scrollbar-thumb,
 #contact::-webkit-scrollbar-thumb,
-#faq::-webkit-scrollbar-thumb,
-#copycats::-webkit-scrollbar-thumb,
-#experiments::-webkit-scrollbar-thumb {
+#faq::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
 }
 #projects::-webkit-scrollbar-track,
 #info::-webkit-scrollbar-track,
 #contact::-webkit-scrollbar-track,
-#faq::-webkit-scrollbar-track,
-#copycats::-webkit-scrollbar-track,
-#experiments::-webkit-scrollbar-track {
+#faq::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* Efectos Hover y Transiciones */
+/* FadeIn + Hover transitions */
 .nav-list li a,
 .section-item {
   transition: color 0.3s ease, opacity 0.3s ease;
@@ -267,8 +336,6 @@ body::before {
 .section-item:hover {
   color: #ccc;
 }
-
-/* Fade-in Global */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -279,7 +346,7 @@ body::before {
   transform: translateY(0);
 }
 
-/* Glitch Text Sencillo */
+/* GLITCH TEXT */
 .glitch-text {
   position: relative;
   display: inline-block;
@@ -287,29 +354,87 @@ body::before {
   animation: glitchAnimation 3s infinite;
 }
 @keyframes glitchAnimation {
-  0% { text-shadow: 0 0 1px #fff; }
-  5% { text-shadow: 2px 0 #f0f, -2px -1px #0ff; }
-  10% { text-shadow: -2px 0 #f0f; }
-  15% { text-shadow: 2px -1px #0ff; }
-  20% { text-shadow: 0 0 1px #fff; }
+  0%   { text-shadow: 0 0 1px #fff; }
+  5%   { text-shadow: 2px 0 #f0f, -2px -1px #0ff; }
+  10%  { text-shadow: -2px 0 #f0f; }
+  15%  { text-shadow: 2px -1px #0ff; }
+  20%  { text-shadow: 0 0 1px #fff; }
   100% { text-shadow: 0 0 1px #fff; }
 }
-
-/* Scroll Reveal */
-.scroll-reveal {
-  /* Por defecto sin estilo especial, 
-     la clase .in-view se agrega con Intersection Observer */
-}
 .scroll-reveal.in-view {
-  /* Podrías cambiar color o un transform */
   color: #fff;
 }
 
-/* (Opcional) Ajustes a headings, 
-   por ejemplo, en modo super-ligero 
-*/
+/* Headings style */
 h2 {
   font-size: 28px;
   font-weight: 300;
   margin-bottom: 10px;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+
+/* MOBILE (up to ~768px) */
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+  }
+  .footer {
+    margin-top: 20px;
+  }
+  .content {
+    margin-left: 0;
+    width: 100%;
+    padding: 10px;
+  }
+  .content section {
+    height: auto;
+    padding: 20px;
+  }
+  .header-info h1 {
+    font-size: 36px;
+  }
+  .nav-list li {
+    margin-bottom: 10px;
+  }
+  .intro-text {
+    font-size: 16px;
+  }
+  /* ensure bullets remain visible on mobile */
+  .nav-bullet {
+    display: inline-block;
+  }
+}
+
+/* TABLET (up to ~1024px) */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 30%;
+  }
+  .content {
+    margin-left: 30%;
+    width: 70%;
+  }
+  .header-info h1 {
+    font-size: 48px;
+  }
+}
+
+/* ULTRA-WIDE (from ~1600px) */
+@media (min-width: 1600px) {
+  .header-info h1 {
+    font-size: 64px;
+  }
+  .intro-text {
+    font-size: 20px;
+    max-width: 500px;
+  }
+  .project-container {
+    margin-right: 60px;
+  }
 }

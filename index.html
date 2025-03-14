@@ -8,24 +8,32 @@
 </head>
 <body>
 
-<!-- Canvas de fondo -->
+<!-- LOADING SCREEN with progress bar -->
+<div class="loading-screen">
+  <div class="loading-content">
+    <h2 class="glitch-text">ローディング... <br> LUIS RODRIGUEZ PORTFOLIO</h2>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Background Canvas -->
 <canvas id="bgCanvas"></canvas>
 
-<!-- Panel de Opciones (Light / Dark / Monospaced) -->
+<!-- THEME TOGGLE: 
+     Checkbox + <span id="mode-label"> to dynamically change text 
+-->
 <div class="theme-panel">
   <label>
-    <input type="checkbox" id="toggle-dark" />
-    DARK
-  </label>
-  <label>
-    <input type="checkbox" id="toggle-mono" />
-    MONOSPACED
+    <input type="checkbox" id="toggle-dark" checked />
+    <span id="mode-label">DARK</span>
   </label>
 </div>
 
 <div class="page-wrapper">
-  
-  <!-- Barra Lateral -->
+
+  <!-- FIXED SIDEBAR -->
   <aside class="sidebar">
     <div class="header-info">
       <h1>Keita Yamada</h1>
@@ -33,27 +41,36 @@
     </div>
     <nav>
       <ul class="nav-list">
-        <li><div class="nav-bullet"></div><a href="#" data-section="home">Home</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="projects">Projects</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="info">Info</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="contact">Contact</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="faq">FAQ</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="copycats">Copycats</a></li>
-        <li><div class="nav-bullet"></div><a href="#" data-section="experiments">Experiments</a></li>
+        <li>
+          <div class="nav-bullet"></div>
+          <a href="#" data-section="home">Home</a>
+        </li>
+        <li>
+          <div class="nav-bullet"></div>
+          <a href="#" data-section="projects">Projects</a>
+        </li>
+        <li>
+          <div class="nav-bullet"></div>
+          <a href="#" data-section="info">Info</a>
+        </li>
+        <li>
+          <div class="nav-bullet"></div>
+          <a href="#" data-section="contact">Contact</a>
+        </li>
+        <li>
+          <div class="nav-bullet"></div>
+          <a href="#" data-section="faq">FAQ</a>
+        </li>
       </ul>
     </nav>
     <p class="footer">&copy; Keita Yamada</p>
   </aside>
 
-  <!-- Contenido a la Derecha -->
+  <!-- MAIN CONTENT -->
   <main class="content">
-    
-    <!-- Sección HOME -->
+
+    <!-- HOME -->
     <section id="home">
-      <!-- .section-item para animación escalonada, 
-           .glitch-text para efecto glitch, 
-           .scroll-reveal para animación al hacer scroll. 
-      -->
       <div class="section-item glitch-text scroll-reveal">
         <p class="intro-text fade-in">
           Born in 1994<br/>
@@ -65,21 +82,29 @@
       </div>
     </section>
 
-    <!-- Sección PROJECTS -->
+    <!-- PROJECTS -->
     <section id="projects">
       <div class="project-container">
         <div class="section-item glitch-text scroll-reveal">
           <span>Jul.2024 / Portfolio / Dev</span>
-          <strong>Proyecto Prueba #1</strong>
+          <strong>
+            <a href="https://taronjabox.luisrocedev.es" target="_blank">
+              Proyecto #1 - TaronjaBox
+            </a>
+          </strong>
         </div>
         <div class="section-item glitch-text scroll-reveal">
           <span>Feb.2025 / Landing / Frontend</span>
-          <strong>Proyecto Prueba #2</strong>
+          <strong>
+            <a href="https://example.com" target="_blank">
+              Proyecto #2 - Example
+            </a>
+          </strong>
         </div>
       </div>
     </section>
 
-    <!-- Sección INFO -->
+    <!-- INFO -->
     <section id="info">
       <div class="section-item glitch-text scroll-reveal">
         <h2>Information</h2>
@@ -89,7 +114,7 @@
       </div>
     </section>
 
-    <!-- Sección CONTACT -->
+    <!-- CONTACT -->
     <section id="contact">
       <div class="section-item glitch-text scroll-reveal">
         <h2>Contact</h2>
@@ -97,7 +122,7 @@
       </div>
     </section>
 
-    <!-- Sección FAQ -->
+    <!-- FAQ -->
     <section id="faq">
       <div class="section-item glitch-text scroll-reveal">
         <h2>FAQ</h2>
@@ -105,26 +130,10 @@
       </div>
     </section>
 
-    <!-- Sección COPYCATS -->
-    <section id="copycats">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Copycats</h2>
-        <p>Similar references or disclaimers about mimicked design.</p>
-      </div>
-    </section>
-
-    <!-- Sección EXPERIMENTS -->
-    <section id="experiments">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Experiments</h2>
-        <p>Here you can embed p5.js sketches or generative art demos.</p>
-        <div id="sketch-container"></div>
-      </div>
-    </section>
-
   </main>
-</div>
+</div> <!-- .page-wrapper -->
 
+<!-- Main Script -->
 <script src="script.js"></script>
 </body>
 </html>

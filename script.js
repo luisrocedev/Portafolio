@@ -1,32 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Inicializar Navegación de Secciones
+    // 1. Loading Screen
+    initLoadingScreen();
+  
+    // 2. Sections + staggered animations
     initSections();
   
-    // 2. Inicializar Panel de Opciones (Light / Dark / Monospaced)
+    // 3. Dark/Light toggle (default: dark)
     initThemePanel();
   
-    // 3. Efecto Parallax en el background (body::before)
+    // 4. Parallax effect
     initParallax();
   
-    // 4. Fade-in global (para .fade-in)
+    // 5. Fade-in global
     initFadeInGlobal();
   
-    // 5. Intersection Observer (scroll reveal)
+    // 6. Scroll reveal
     initScrollReveal();
   
-    // 6. Canvas Animado
+    // 7. Animated canvas background
     initCanvasAnimation();
   });
   
-  /* ===============================
-     Módulo 1: Navegación y 
-     animación escalonada de secciones
-  =============================== */
+  /**
+   * 1) Loading Screen with progress bar
+   *    increments from 0 to 100%, then hides.
+   */
+  function initLoadingScreen() {
+    const loadingScreen = document.querySelector(".loading-screen");
+    const loadingBar = document.querySelector(".loading-bar");
+    if (!loadingScreen || !loadingBar) return;
+  
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 2; // increment 2% each step
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+  
+        // fade out after short delay
+        setTimeout(() => {
+          loadingScreen.classList.add("hide");
+          setTimeout(() => {
+            loadingScreen.remove();
+          }, 600);
+        }, 300);
+      }
+      // update bar width
+      loadingBar.style.width = progress + "%";
+    }, 30);
+  }
+  
+  /**
+   * 2) Navigation + Section Animations
+   *    show chosen section, animate .section-item
+   */
   function initSections() {
     const sections = document.querySelectorAll("main section");
     const links = document.querySelectorAll(".nav-list li a");
   
-    // Mostrar HOME por defecto
+    // default to HOME
     showSection("home");
   
     links.forEach(link => {
@@ -44,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
       animateSectionItems(sectionId);
     }
   
-    // .section-item => animación escalonada
     function animateSectionItems(sectionId) {
       const items = document.querySelectorAll(`#${sectionId} .section-item`);
       items.forEach((item, index) => {
@@ -56,32 +87,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   
-  /* ===============================
-     Módulo 2: Panel de Opciones 
-     (Light / Dark / Monospaced)
-  =============================== */
+  /**
+   * 3) DARK/LIGHT TOGGLE
+   *    If checkbox is checked => dark mode => label text => "LIGHT"
+   *    If unchecked => light mode => label text => "DARK"
+   */
   function initThemePanel() {
     const toggleDark = document.getElementById("toggle-dark");
-    const toggleMono = document.getElementById("toggle-mono");
+    const modeLabel = document.getElementById("mode-label");
   
-    // Leer del localStorage si deseas
-    // Ejemplo: const savedDark = localStorage.getItem("dark-mode") === "true";
+    function updateMode() {
+      if (toggleDark.checked) {
+        // dark
+        document.body.classList.remove("light-mode");
+        document.body.classList.add("dark-mode");
+        modeLabel.textContent = "LIGHT";
+      } else {
+        // light
+        document.body.classList.remove("dark-mode");
+        document.body.classList.add("light-mode");
+        modeLabel.textContent = "DARK";
+      }
+    }
   
-    toggleDark.addEventListener("change", () => {
-      document.body.classList.toggle("light-mode", !toggleDark.checked);
-      document.body.classList.toggle("dark-mode", toggleDark.checked);
-      // Guardar en localStorage si quieres: localStorage.setItem("dark-mode", toggleDark.checked);
-    });
-  
-    toggleMono.addEventListener("change", () => {
-      document.body.classList.toggle("mono-font", toggleMono.checked);
-      // localStorage.setItem("mono-font", toggleMono.checked);
-    });
+    toggleDark.addEventListener("change", updateMode);
+    // set initial mode
+    updateMode();
   }
   
-  /* ===============================
-     Módulo 3: Parallax con mouse
-  =============================== */
+  /**
+   * 4) PARALLAX
+   *    moves radial gradient + noise based on mouse
+   */
   function initParallax() {
     document.addEventListener("mousemove", (e) => {
       const moveX = (e.clientX / window.innerWidth - 0.5) * 10;
@@ -91,10 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  /* ===============================
-     Módulo 4: Fade-in Global 
-     (para .fade-in)
-  =============================== */
+  /**
+   * 5) FADE-IN GLOBAL
+   *    .fade-in appear after 500ms
+   */
   function initFadeInGlobal() {
     setTimeout(() => {
       document.querySelectorAll(".fade-in").forEach(el => {
@@ -103,10 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   }
   
-  /* ===============================
-     Módulo 5: Intersection Observer
-     (Scroll Reveal)
-  =============================== */
+  /**
+   * 6) SCROLL REVEAL
+   *    IntersectionObserver reveals .scroll-reveal
+   */
   function initScrollReveal() {
     const revealEls = document.querySelectorAll(".scroll-reveal");
     const observer = new IntersectionObserver((entries) => {
@@ -122,24 +159,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   
-  /* ===============================
-     Módulo 6: Canvas Animado
-  =============================== */
+  /**
+   * 7) ANIMATED CANVAS
+   *    wave-like vertical blocks
+   */
   function initCanvasAnimation() {
     const canvas = document.getElementById("bgCanvas");
     const ctx = canvas.getContext("2d");
     let w, h;
     let time = 0;
   
-    // Parámetros 
-    const numBlocks = 6;       
-    const baseGray = 60;       
-    const grayStep = 10;       
-    const minAlpha = 0.02;     
-    const alphaStep = 0.03;    
-    const baseOffsetStep = 20; 
-    const waveAmplitude = 10;  
-    const waveSpeed = 0.01;    
+    // wave parameters
+    const numBlocks = 6;
+    const baseGray = 60;
+    const grayStep = 10;
+    const minAlpha = 0.02;
+    const alphaStep = 0.03;
+    const baseOffsetStep = 20;
+    const waveAmplitude = 10;
+    const waveSpeed = 0.01;
   
     function resizeCanvas() {
       w = window.innerWidth;
@@ -148,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
       canvas.height = h;
     }
   
-    // Evitar triggers múltiples en resize
     let resizeRAF;
     window.addEventListener("resize", () => {
       if (resizeRAF) cancelAnimationFrame(resizeRAF);
@@ -164,9 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < numBlocks; i++) {
         const gray = baseGray + i * grayStep;
         const alpha = minAlpha + i * alphaStep;
-        const baseOffsetX = i * baseOffsetStep;
+        const offsetBase = i * baseOffsetStep;
         const wave = waveAmplitude * Math.sin(time + i);
-        const offsetX = baseOffsetX + wave;
+  
+        const offsetX = offsetBase + wave;
         const offsetWidth = w - offsetX;
   
         ctx.fillStyle = `rgba(${gray}, ${gray}, ${gray}, ${alpha})`;
