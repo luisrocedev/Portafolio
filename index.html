@@ -8,133 +8,122 @@
 </head>
 <body>
 
-<!-- LOADING SCREEN with progress bar -->
-<div class="loading-screen">
-  <div class="loading-content">
-    <h2 class="glitch-text">ローディング... <br> LUIS RODRIGUEZ PORTFOLIO</h2>
-    <div class="loading-bar-container">
-      <div class="loading-bar"></div>
+  <!-- LOADING SCREEN with progress bar -->
+  <div class="loading-screen">
+    <div class="loading-content">
+      <h2 class="glitch-text">ローディング... <br> LUIS RODRIGUEZ PORTFOLIO</h2>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Background Canvas -->
-<canvas id="bgCanvas"></canvas>
+  <!-- Background Canvas -->
+  <canvas id="bgCanvas"></canvas>
 
-<!-- THEME TOGGLE (Dark/Light) 
-     with a label that changes text from "DARK" to "LIGHT"
-     depending on current mode 
--->
-<div class="theme-panel">
-  <label>
-    <input type="checkbox" id="toggle-dark" checked />
-    <span id="mode-label">DARK</span>
-  </label>
-</div>
+  <!-- THEME TOGGLE (Dark/Light) -->
+  <div class="theme-panel">
+    <label>
+      <input type="checkbox" id="toggle-dark" checked />
+      <span id="mode-label">DARK</span>
+    </label>
+  </div>
 
-<div class="page-wrapper">
-
-  <!-- FIXED SIDEBAR -->
-  <aside class="sidebar">
-    <div class="header-info">
-      <h1>Luis Rodriguez</h1>
-      <p>Designer & Developer</p>
-    </div>
-    <nav>
-      <ul class="nav-list">
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="home">Home</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="projects">Projects</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="info">Info</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="contact">Contact</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="faq">FAQ</a>
-        </li>
-      </ul>
-    </nav>
-    <p class="footer">&copy; Luis Rodriguez</p>
-  </aside>
-
-  <!-- MAIN CONTENT -->
-  <main class="content">
-
-    <!-- HOME -->
-    <section id="home">
-      <div class="section-item glitch-text scroll-reveal">
-        <p class="intro-text fade-in">
-          Texto de prueba<br/>
-          texto de prueba<br/><br/>
-          texto de prueba<br/>
-          new expressions<br/>
-          in web design...
-        </p>
+  <div class="page-wrapper">
+    <!-- SIDEBAR / CABECERA en móvil -->
+    <aside class="sidebar">
+      <div class="header-info">
+        <h1>Luis Rodriguez</h1>
+        <p>Designer & Developer</p>
       </div>
-    </section>
+      <nav>
+        <ul class="nav-list">
+          <li>
+            <a href="#" data-section="home">Home</a>
+          </li>
+          <li>
+            <a href="#" data-section="projects">Projects</a>
+          </li>
+          <li>
+            <a href="#" data-section="info">Info</a>
+          </li>
+          <li>
+            <a href="#" data-section="contact">Contact</a>
+          </li>
+          <li>
+            <a href="#" data-section="faq">FAQ</a>
+          </li>
+        </ul>
+      </nav>
+      <p class="footer">&copy; Luis Rodriguez</p>
+    </aside>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="project-container">
+    <!-- MAIN CONTENT -->
+    <main class="content">
+      <!-- HOME -->
+      <section id="home">
         <div class="section-item glitch-text scroll-reveal">
-          <span>Jul.2024 / Portfolio / Dev</span>
-          <strong>
-            <a href="http://taronjaboxvalencia.luisrocedev.es/" target="_blank">
-              Proyecto #1 - TaronjaBox
-            </a>
-          </strong>
+          <p class="intro-text fade-in">
+            Texto de prueba<br/>
+            texto de prueba<br/><br/>
+            texto de prueba<br/>
+            new expressions<br/>
+            in web design...
+          </p>
         </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="project-container">
+          <div class="section-item glitch-text scroll-reveal">
+            <span>Jul.2024 / Portfolio / Dev</span>
+            <strong>
+              <a href="http://taronjaboxvalencia.luisrocedev.es/" target="_blank">
+                Proyecto #1 - TaronjaBox
+              </a>
+            </strong>
+          </div>
+          <div class="section-item glitch-text scroll-reveal">
+            <span>Feb.2025 / Landing / Frontend</span>
+            <strong>
+              <a href="https://example.com" target="_blank">
+                Proyecto #2 - Example
+              </a>
+            </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFO -->
+      <section id="info">
         <div class="section-item glitch-text scroll-reveal">
-          <span>Feb.2025 / Landing / Frontend</span>
-          <strong>
-            <a href="https://example.com" target="_blank">
-              Proyecto #2 - Example
-            </a>
-          </strong>
+          <h2>Information</h2>
+          <p>
+            Background, style, or personal approach details...
+          </p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- INFO -->
-    <section id="info">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Information</h2>
-        <p>
-          Background, style, or personal approach details...
-        </p>
-      </div>
-    </section>
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-item glitch-text scroll-reveal">
+          <h2>Contact</h2>
+          <p>Email, social, anything you prefer.</p>
+        </div>
+      </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Contact</h2>
-        <p>Email, social, anything you prefer.</p>
-      </div>
-    </section>
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="section-item glitch-text scroll-reveal">
+          <h2>FAQ</h2>
+          <p>Common Q & A about your services.</p>
+        </div>
+      </section>
+    </main>
+  </div> <!-- .page-wrapper -->
 
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>FAQ</h2>
-        <p>Common Q & A about your services.</p>
-      </div>
-    </section>
-
-  </main>
-</div> <!-- .page-wrapper -->
-
-<!-- Main Script -->
-<script src="script.js"></script>
+  <!-- Main Script -->
+  <script src="script.js"></script>
 </body>
 </html>

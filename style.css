@@ -26,7 +26,6 @@ body {
   border: 1px solid #333;
   min-height: 100vh;
   overflow-x: hidden;
-  /* Smooth transition for background + color */
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -90,7 +89,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* CUSTOM CHECKBOX: black in light mode, white in dark mode */
+/* CUSTOM CHECKBOX */
 .theme-panel input[type="checkbox"] {
   -webkit-appearance: none;
   width: 13px;
@@ -108,17 +107,13 @@ body {
   background-color: #fff;
 }
 
-/* LIGHT MODE => #000 text 
-   also transition for color 
-*/
+/* LIGHT MODE */
 body.light-mode {
   background-color: #fff;
   color: #000;
   border: 1px solid #ccc;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
-
-/* force #000 for all text-like elements in light mode */
 body.light-mode .sidebar,
 body.light-mode .header-info h1,
 body.light-mode .header-info p,
@@ -178,7 +173,6 @@ body.dark-mode {
   justify-content: space-between;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   overflow-y: auto;
-  /* transition for background + color */
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 .header-info h1 {
@@ -222,14 +216,14 @@ body.dark-mode {
   color: #fff;
 }
 
-/* Footer in sidebar */
+/* Footer */
 .footer {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.4);
   transition: color 0.5s ease;
 }
 
-/* MAIN CONTENT => 75% on desktop */
+/* MAIN CONTENT */
 .content {
   margin-left: 25%;
   width: 75%;
@@ -239,8 +233,6 @@ body.dark-mode {
   overflow: hidden;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
-
-/* Each section => full height on desktop */
 .content section {
   display: none;
   width: 100%;
@@ -250,7 +242,7 @@ body.dark-mode {
   transition: color 0.5s ease, background-color 0.5s ease;
 }
 
-/* PARALLAX BG => radial gradient + noise */
+/* PARALLAX BG */
 body::before {
   content: "";
   position: fixed;
@@ -316,7 +308,7 @@ body::before {
   text-align: right;
 }
 
-/* STAGGERED REVEAL => .section-item.show */
+/* STAGGERED REVEAL */
 .section-item {
   opacity: 0;
   transform: translateY(20px);
@@ -327,7 +319,7 @@ body::before {
   transform: translateY(0);
 }
 
-/* Minimal scrollbars for sections */
+/* Scrollbars */
 #projects::-webkit-scrollbar,
 #info::-webkit-scrollbar,
 #contact::-webkit-scrollbar,
@@ -348,7 +340,7 @@ body::before {
   background: transparent;
 }
 
-/* FadeIn + Hover transitions */
+/* Transitions */
 .nav-list li a,
 .section-item {
   transition: color 0.3s ease, opacity 0.3s ease;
@@ -385,7 +377,7 @@ body::before {
   color: #fff;
 }
 
-/* Headings style */
+/* Headings */
 h2 {
   font-size: 28px;
   font-weight: 300;
@@ -397,39 +389,94 @@ h2 {
 
 /* MOBILE (up to ~768px) */
 @media (max-width: 768px) {
+  /* Forzar viewport fijo y sin scroll */
+  html, body {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Reorganización en columna */
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Sidebar como cabecera fija */
   .sidebar {
-    position: static;
+    position: relative;
     width: 100%;
-    height: auto;
-    border-right: none;
+    height: 20vh;
+    border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    transition: none; /* can remove if you want transitions here too */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
-  .footer {
-    margin-top: 20px;
+  
+  .header-info {
+    flex: 1;
   }
-  .content {
-    margin-left: 0;
-    width: 100%;
-    padding: 10px;
-  }
-  .content section {
-    height: auto;
-    padding: 20px;
-  }
+  
+  /* Redimensionar el nombre con unidades relativas para adaptarse al viewport */
   .header-info h1 {
-    font-size: 36px;
+    font-size: 6vw;
+    margin: 0;
+  }
+  .header-info p {
+    font-size: 3vw;
+    margin: 0;
+  }
+  
+  /* Navegación en línea */
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 10px;
   }
   .nav-list li {
-    margin-bottom: 10px;
+    margin: 0;
   }
+  
+  /* Opcional: ocultar footer para no saturar la cabecera */
+  .footer {
+    display: none;
+  }
+  
+  /* Área de contenido fija */
+  .content {
+    width: 100%;
+    height: 80vh;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Cada sección ocupa el 100% del área de contenido */
+  .content section {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .intro-text {
     font-size: 16px;
   }
-  /* ensure bullets remain visible on mobile */
+  
+  /* Opcional: ocultar las “bullets” de navegación en móvil */
   .nav-bullet {
-    display: inline-block;
+    display: none;
   }
 }
 
