@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
-* 1) Loading Screen with progress bar
-*/
+ * 1) Loading Screen with progress bar
+ */
 function initLoadingScreen() {
   const loadingScreen = document.querySelector(".loading-screen");
   const loadingBar = document.querySelector(".loading-bar");
@@ -35,7 +35,6 @@ function initLoadingScreen() {
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
-
       setTimeout(() => {
         loadingScreen.classList.add("hide");
         setTimeout(() => {
@@ -48,12 +47,13 @@ function initLoadingScreen() {
 }
 
 /**
-* 2) Navigation + Section Animations
-*/
+ * 2) Navigation + Section Animations
+ */
 function initSections() {
   const sections = document.querySelectorAll("main section");
   const links = document.querySelectorAll(".nav-list li a");
 
+  // Show HOME by default
   showSection("home");
 
   links.forEach(link => {
@@ -83,8 +83,10 @@ function initSections() {
 }
 
 /**
-* 3) DARK/LIGHT TOGGLE
-*/
+ * 3) DARK/LIGHT TOGGLE
+ *    If checked => dark => label "LIGHT"
+ *    If unchecked => light => label "DARK"
+ */
 function initThemePanel() {
   const toggleDark = document.getElementById("toggle-dark");
   const modeLabel = document.getElementById("mode-label");
@@ -106,8 +108,8 @@ function initThemePanel() {
 }
 
 /**
-* 4) PARALLAX
-*/
+ * 4) PARALLAX
+ */
 function initParallax() {
   document.addEventListener("mousemove", (e) => {
     const moveX = (e.clientX / window.innerWidth - 0.5) * 10;
@@ -118,8 +120,8 @@ function initParallax() {
 }
 
 /**
-* 5) FADE-IN GLOBAL
-*/
+ * 5) FADE-IN GLOBAL
+ */
 function initFadeInGlobal() {
   setTimeout(() => {
     document.querySelectorAll(".fade-in").forEach(el => {
@@ -129,8 +131,8 @@ function initFadeInGlobal() {
 }
 
 /**
-* 6) SCROLL REVEAL
-*/
+ * 6) SCROLL REVEAL
+ */
 function initScrollReveal() {
   const revealEls = document.querySelectorAll(".scroll-reveal");
   const observer = new IntersectionObserver((entries) => {
@@ -147,8 +149,8 @@ function initScrollReveal() {
 }
 
 /**
-* 7) ANIMATED CANVAS
-*/
+ * 7) ANIMATED CANVAS
+ */
 function initCanvasAnimation() {
   const canvas = document.getElementById("bgCanvas");
   const ctx = canvas.getContext("2d");
