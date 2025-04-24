@@ -33,7 +33,6 @@ function initLoadingScreen() {
   const interval = setInterval(() => {
     progress += 2;
     if (progress >= 100) {
-      progress = 100;
       clearInterval(interval);
       setTimeout(() => {
         loadingScreen.classList.add("hide");
@@ -42,7 +41,7 @@ function initLoadingScreen() {
         }, 600);
       }, 300);
     }
-    loadingBar.style.width = progress + "%";
+    loadingBar.style.width = `${progress}%`;
   }, 30);
 }
 
@@ -53,33 +52,110 @@ function initSections() {
   const sections = document.querySelectorAll("main section");
   const links = document.querySelectorAll(".nav-list li a");
 
-  // Show HOME by default
+  // Show HOME section by default
   showSection("home");
 
+  // Event listeners for navigation links
   links.forEach(link => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
       const sectionId = link.getAttribute("data-section");
       showSection(sectionId);
+      updateActiveLink(link);
     });
   });
 
-  function showSection(sectionId) {
-    sections.forEach(sec => {
-      sec.style.display = (sec.id === sectionId) ? "flex" : "none";
-    });
-    animateSectionItems(sectionId);
+  // Activate the first link by default
+  if (links.length > 0) {
+    links[0].classList.add("active");
   }
 
+  // Function to show sections with smooth transition
+  function showSection(sectionId) {
+    sections.forEach(sec => {
+      if (sec.id === sectionId) {
+        sec.style.display = "flex"; // Use flex to ensure proper alignment
+        setTimeout(() => {
+          sec.scrollTop = 0;
+          sec.classList.add("active");
+          animateSectionItems(sectionId);
+        }, 50);
+      } else {
+        sec.classList.remove("active");
+        setTimeout(() => {
+          if (!sec.classList.contains("active")) {
+            sec.style.display = "none";
+          }
+        }, 500);
+      }
+    });
+
+    // Update URL hash without reloading the page
+    history.pushState(null, null, `#${sectionId}`);
+  }
+
+  // Function to animate items within the active section
   function animateSectionItems(sectionId) {
     const items = document.querySelectorAll(`#${sectionId} .section-item`);
     items.forEach((item, index) => {
       item.classList.remove("show");
       setTimeout(() => {
         item.classList.add("show");
-      }, 150 * index);
+      }, 100 + 80 * index);
     });
   }
+
+  // Function to update the active link in navigation
+  function updateActiveLink(activeLink) {
+    links.forEach(link => link.classList.remove("active"));
+    activeLink.classList.add("active");
+  }
+
+  // Observer to reveal elements on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in-view");
+        if (entry.target.classList.contains("section-item")) {
+          entry.target.classList.add("show");
+        }
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: "0px 0px -10% 0px"
+  });
+
+  // Observe all elements with the class scroll-reveal
+  document.querySelectorAll(".scroll-reveal").forEach(el => {
+    observer.observe(el);
+  });
+
+  // Check if there is a hash in the URL on load
+  window.addEventListener("load", () => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      const navLink = document.querySelector(`[data-section="${hash}"]`);
+      if (navLink) navLink.click();
+    }
+  });
+
+  // Ensure scrolls work correctly within each section
+  sections.forEach(section => {
+    section.addEventListener('scroll', () => {
+      const revealElements = section.querySelectorAll('.scroll-reveal:not(.in-view)');
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const sectionRect = section.getBoundingClientRect();
+        if (rect.top < sectionRect.bottom - 100) {
+          el.classList.add('in-view');
+          if (el.classList.contains("section-item")) {
+            el.classList.add("show");
+          }
+        }
+      });
+    });
+  });
 }
 
 /**
@@ -184,7 +260,6 @@ function initCanvasAnimation() {
   function drawBlocks() {
     ctx.clearRect(0, 0, w, h);
     const blockHeight = h / numBlocks;
-
     for (let i = 0; i < numBlocks; i++) {
       const gray = baseGray + i * grayStep;
       const alpha = minAlpha + i * alphaStep;

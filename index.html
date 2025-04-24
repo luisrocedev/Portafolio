@@ -7,131 +7,195 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<!-- LOADING SCREEN with progress bar -->
-<div class="loading-screen">
-  <div class="loading-content">
-    <h2 class="glitch-text">ローディング... <br> LUIS RODRIGUEZ PORTFOLIO</h2>
-    <div class="loading-bar-container">
-      <div class="loading-bar"></div>
+  <!-- LOADING SCREEN with progress bar and particles -->
+  <div class="loading-screen">
+    <div class="loading-content">
+      <h2 class="glitch-text">ローディング... <br> LUIS RODRIGUEZ PORTFOLIO</h2>
+      <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+      </div>
+      <canvas id="loadingCanvas"></canvas>
     </div>
   </div>
-</div>
 
-<!-- Background Canvas -->
-<canvas id="bgCanvas"></canvas>
+  <!-- Background Canvas -->
+  <canvas id="bgCanvas"></canvas>
 
-<!-- THEME TOGGLE (Dark/Light) -->
-<div class="theme-panel">
-  <label>
-    <input type="checkbox" id="toggle-dark" checked />
-    <span id="mode-label">DARK</span>
-  </label>
-</div>
+  <!-- THEME TOGGLE (Dark/Light) -->
+  <div class="theme-panel">
+    <label>
+      <input type="checkbox" id="toggle-dark" checked />
+      <span id="mode-label">DARK</span>
+    </label>
+  </div>
 
-<div class="page-wrapper">
+  <div class="canvas-container">
+    <div class="page-wrapper">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="header-info">
+          <h1>Luis Rodriguez</h1>
+          <p>Designer & Developer</p>
+        </div>
+        <nav>
+          <ul class="nav-list">
+            <li><div class="nav-bullet"></div><a href="#" data-section="home">Home</a></li>
+            <li><div class="nav-bullet"></div><a href="#" data-section="projects">Projects</a></li>
+            <li><div class="nav-bullet"></div><a href="#" data-section="info">Info</a></li>
+            <li><div class="nav-bullet"></div><a href="#" data-section="contact">Contact</a></li>
+            <li><div class="nav-bullet"></div><a href="#" data-section="faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <p class="footer">&copy; Luis Rodriguez</p>
+      </aside>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="header-info">
-      <h1>Luis Rodriguez</h1>
-      <p>Designer & Developer</p>
+      <!-- MAIN CONTENT -->
+      <main class="content">
+        <!-- HOME -->
+        <section id="home">
+          <div class="section-item glitch-text scroll-reveal">
+            <p class="intro-text fade-in">
+              👋 Hola, soy <strong>Luis Jahir Rodríguez Cedeño</strong><br /><br />
+              💻 Desarrollador en formación con enfoque Full Stack. Actualmente estudio DAM, combinando habilidades de frontend atractivo con lógica backend estructurada.<br /><br />
+              🚀 He desarrollado desde portales modulares hasta sistemas de gestión reales como TPVs, PMS hoteleros y microservicios de IA. Trabajo con HTML, CSS, JS, PHP, Node.js y MySQL.<br /><br />
+              🌐 Este portafolio es una muestra real de lo que hago: código funcional, escalable y listo para producción. ¿Empezamos?
+            </p>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+          <div class="project-container">
+            <div class="section-item glitch-text scroll-reveal">
+              <span>Full Stack / Web modular</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/taronjaboxvalencia" target="_blank">
+                  TaronjaBoxValencia – Web dinámica para centro deportivo
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>Panel Admin / Gestión modular</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/darkorange" target="_blank">
+                  DarkOrange – Panel de control con login y CRUDs
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>PMS Hotel / App monolítica</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/PMS-Daniya" target="_blank">
+                  PMS Daniya – Gestión de reservas, pagos y usuarios
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>Gestión de clientes / SaaS</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/CRM" target="_blank">
+                  CRM – Sistema para seguimiento y atención al cliente
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>TPV Restauración / Venta directa</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/TPV-Voltereta" target="_blank">
+                  TPV Voltereta – Punto de venta con caja, pedidos y chat
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>Realtime / Node + WebSockets</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/LChat" target="_blank">
+                  LChat – Chat en tiempo real con diseño moderno
+                </a>
+              </strong>
+            </div>
+
+            <div class="section-item glitch-text scroll-reveal">
+              <span>IA aplicada / Intent detection</span>
+              <strong>
+                <a href="https://github.com/luisrocedev/asistente-ia-pms" target="_blank">
+                  Asistente IA PMS – Microservicio de IA para hoteles
+                </a>
+              </strong>
+            </div>
+          </div>
+        </section>
+
+        <!-- INFO -->
+        <section id="info">
+          <div class="section-item glitch-text scroll-reveal">
+            <h2>🧩 Formación & Tecnología</h2>
+            <p>
+              🎓 Actualmente curso 1º de Desarrollo de Aplicaciones Multiplataforma (DAM), donde he trabajado en proyectos reales combinando todas las asignaturas: programación, bases de datos, entornos, sistemas y lenguajes de marcas.
+            </p>
+            <p>
+              🛠️ Stack principal:
+              <ul>
+                <li>Frontend: HTML, CSS, JavaScript</li>
+                <li>Backend: PHP, Node.js, Express</li>
+                <li>Bases de datos: MySQL, JSON</li>
+                <li>IA y NLP: librería Natural (Node), clasificadores Bayesianos</li>
+                <li>Control de versiones: Git + GitHub</li>
+                <li>Deploy: Replit, GitHub Pages, VPS IONOS (Nginx + dominios)</li>
+              </ul>
+            </p>
+            <p>
+              🔧 Como desarrollador, mi enfoque es: <em>“crear software funcional, modular y escalable, adaptado a necesidades reales, con documentación clara y visión a futuro”</em>.
+            </p>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+          <div class="section-item glitch-text scroll-reveal">
+            <h2>📬 Contacto</h2>
+            <p>
+              Si deseas colaborar, contratar o simplemente conectar conmigo, puedes escribirme por correo o seguirme en redes:
+            </p>
+            <ul>
+              <li>✉️ Correo: <a href="mailto:luisrocedev@gmail.com">luisrocedev@gmail.com</a></li>
+              <li>💻 GitHub: <a href="https://github.com/luisrocedev" target="_blank">github.com/luisrocedev</a></li>
+              <li>🧠 Replit: <a href="https://replit.com/@luisrocedev" target="_blank">replit.com/@luisrocedev</a></li>
+              <li>💼 LinkedIn: <a href="https://es.linkedin.com/in/luisrocedev" target="_blank">linkedin.com/in/luisrocedev</a></li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+          <div class="section-item glitch-text scroll-reveal">
+            <h2>❓ Preguntas Frecuentes</h2>
+
+            <p><strong>📌 ¿Qué tipo de proyectos realizas?</strong><br>
+            Me especializo en proyectos funcionales y reales: portales web, paneles de administración, TPVs, CRM, PMS y microservicios de IA.</p>
+
+            <p><strong>🤝 ¿Trabajas con clientes?</strong><br>
+            Sí. Puedo trabajar en proyectos propios o por encargo. También colaboro en equipos usando control de versiones y entornos compartidos.</p>
+
+            <p><strong>💻 ¿Cuál es tu stack favorito?</strong><br>
+            HTML, CSS, JavaScript, PHP, Node.js, MySQL. Me gusta combinar frontend bien presentado con backend organizado y seguro.</p>
+
+            <p><strong>🧠 ¿Tienes experiencia con IA?</strong><br>
+            Sí, he desarrollado un microservicio real para detectar intenciones en mensajes usando procesamiento de lenguaje natural.</p>
+
+            <p><strong>🚀 ¿Qué te hace diferente?</strong><br>
+            Desarrollo pensando en producción real, código limpio, modular y documentado. Me centro en entregar valor, no solo diseño.</p>
+          </div>
+        </section>
+      </main>
     </div>
-    <nav>
-      <ul class="nav-list">
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="home">Home</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="projects">Projects</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="info">Info</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="contact">Contact</a>
-        </li>
-        <li>
-          <div class="nav-bullet"></div>
-          <a href="#" data-section="faq">FAQ</a>
-        </li>
-      </ul>
-    </nav>
-    <p class="footer">&copy; Luis Rodriguez</p>
-  </aside>
+  </div>
 
-  <!-- MAIN CONTENT -->
-  <main class="content">
-
-    <!-- HOME -->
-    <section id="home">
-      <div class="section-item glitch-text scroll-reveal">
-        <p class="intro-text fade-in">
-          Texto de prueba<br/>
-          texto de prueba<br/><br/>
-          texto de prueba<br/>
-          new expressions<br/>
-          in web design...
-        </p>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="project-container">
-        <div class="section-item glitch-text scroll-reveal">
-          <span>Jul.2024 / Portfolio / Dev</span>
-          <strong>
-            <a href="http://taronjaboxvalencia.luisrocedev.es/" target="_blank">
-              Proyecto #1 - TaronjaBox
-            </a>
-          </strong>
-        </div>
-        <div class="section-item glitch-text scroll-reveal">
-          <span>Feb.2025 / Landing / Frontend</span>
-          <strong>
-            <a href="https://example.com" target="_blank">
-              Proyecto #2 - Example
-            </a>
-          </strong>
-        </div>
-      </div>
-    </section>
-
-    <!-- INFO -->
-    <section id="info">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Information</h2>
-        <p>
-          Background, style, or personal approach details...
-        </p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>Contact</h2>
-        <p>Email, social, anything you prefer.</p>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="section-item glitch-text scroll-reveal">
-        <h2>FAQ</h2>
-        <p>Common Q & A about your services.</p>
-      </div>
-    </section>
-
-  </main>
-</div> <!-- .page-wrapper -->
-
-<!-- Main Script -->
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
