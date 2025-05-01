@@ -45,4 +45,4 @@ Puedes encontrar mis datos de contacto en la propia web o escribirme a través d
 
 ---
 
-© 2025 [Tu Nombre]. Todos los derechos reservados.
+© 2025 [Luis Rodriguez]. Todos los derechos reservados.
