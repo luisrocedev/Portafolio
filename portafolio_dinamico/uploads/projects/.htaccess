@@ -1,0 +1,13 @@
+# Permitir acceso a imágenes y GIFs
+
+<FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+Order Allow,Deny
+Allow from all
+</FilesMatch>
+
+# Denegar acceso a archivos PHP
+
+<FilesMatch "\.php$">
+Order Deny,Allow
+Deny from all
+</FilesMatch>
