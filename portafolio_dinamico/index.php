@@ -50,11 +50,11 @@ closeConnection($conn);
     <nav class="navbar">
         <div class="logo"><?php echo htmlspecialchars($profile['name'] ?? 'Portfolio'); ?></div>
         <ul class="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Works</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home">Inicio</a></li>
+            <li><a href="#projects">Trabajos</a></li>
+            <li><a href="#skills">Habilidades</a></li>
+            <li><a href="#about">Sobre mí</a></li>
+            <li><a href="#contact">Contacto</a></li>
         </ul>
         <div class="theme-toggle" id="theme-toggle">
             <span>☀</span>
@@ -70,11 +70,7 @@ closeConnection($conn);
                 <span class="gradient-text"><?php echo htmlspecialchars($profile['title'] ?? 'Developer'); ?></span>
             </h1>
             <p class="hero-description">
-                <?php
-                $shortBio = substr($profile['bio'] ?? '', 0, 200);
-                echo htmlspecialchars($shortBio);
-                if (strlen($profile['bio'] ?? '') > 200) echo '...';
-                ?>
+                <?php echo htmlspecialchars($profile['bio'] ?? ''); ?>
             </p>
             <div class="hero-cta">
                 <a href="#contact" class="btn btn-primary">Contactar →</a>
@@ -240,11 +236,6 @@ closeConnection($conn);
                 <?php if ($profile['linkedin_url']): ?>
                     <a href="<?php echo htmlspecialchars($profile['linkedin_url']); ?>" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
                         <span>LI</span>
-                    </a>
-                <?php endif; ?>
-                <?php if ($profile['replit_url']): ?>
-                    <a href="<?php echo htmlspecialchars($profile['replit_url']); ?>" target="_blank" rel="noopener" class="social-link" title="Replit">
-                        <span>RP</span>
                     </a>
                 <?php endif; ?>
             </div>
