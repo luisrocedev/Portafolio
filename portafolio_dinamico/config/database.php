@@ -14,11 +14,12 @@
  */
 
 // Configuración de base de datos
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', 'root');
-define('DB_NAME', 'portafolio_db');
-define('DB_PORT', '8889'); // Puerto MAMP por defecto
+// Prioriza variables de entorno (útil en producción). Si no existen, usa valores por defecto (MAMP/local).
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'portafolio_user');
+define('DB_PASS', getenv('DB_PASS') ?: 'Flogger12_');
+define('DB_NAME', getenv('DB_NAME') ?: 'portafolio_db');
+define('DB_PORT', getenv('DB_PORT') ?: '3306'); // Puerto MySQL por defecto en Ubuntu
 
 // Configuración del sitio
 define('SITE_URL', 'http://localhost:8888/GitHub/Portafolio/portafolio_dinamico');
